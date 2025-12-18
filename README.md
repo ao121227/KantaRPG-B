@@ -1,2 +1,2 @@
-# KantaRPG
-RPGの経過
+# KantaRPG B
+behavior
