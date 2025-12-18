@@ -1,0 +1,2 @@
+scoreboard objectives add treasurechestOpen dummy
+scoreboard objectives add treasurechestNumber dummy

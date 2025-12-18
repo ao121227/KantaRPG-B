@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:wooden_sword","nameTag":"§r§f木の剣","lore":["§r§7先が木でできている。","§r§7切れ味は悪い。","§r§7 使用時 ","§r§aATK +4","","§r§f剣 : "],"enchants": [{"name": "mending", "level": 1}]}

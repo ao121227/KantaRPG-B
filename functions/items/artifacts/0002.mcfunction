@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:feather","nameTag":"leap"}

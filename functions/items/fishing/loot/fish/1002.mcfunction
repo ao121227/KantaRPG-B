@@ -1,0 +1,2 @@
+scriptevent cg:give {"typeId":"minecraft:kelp","nameTag":"§r§fわかめ","lore":["§r§7みずみずしい。","§r§f20§eG§7で売却可能","","§r§f釣りドロップ : "]}
+tellraw @s { "rawtext": [ { "text": "> 「わかめ」§rを釣り上げた。" }] }

@@ -1,0 +1,1 @@
+scoreboard objectives add artifacts2 dummy

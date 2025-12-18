@@ -1,0 +1,21 @@
+scoreboard players set @s[tag=!upSound] upSound 0
+tag @s add upSound
+playsound note.xylophone @s[scores={upSound=1}] ~~~ 0.9 1
+playsound note.bd @s[scores={upSound=1}] ~~~ 0.9 1
+playsound note.bell @s[scores={upSound=1}] ~~~ 0.9 1.2
+playsound note.flute @s[scores={upSound=1}] ~~~ 0.9 1.6
+playsound note.flute @s[scores={upSound=1}] ~~~ 0.9 2
+playsound note.bit @s[scores={upSound=1}] ~~~ 0.9 2.0
+playsound note.bd @s[scores={upSound=2}] ~~~ 0.9 1
+playsound note.xylophone @s[scores={upSound=4}] ~~~ 0.9 1.2
+playsound note.bd @s[scores={upSound=4}] ~~~ 0.9 1.2
+playsound note.bell @s[scores={upSound=4}] ~~~ 0.9 1.4
+playsound note.flute @s[scores={upSound=4}] ~~~ 0.9 1.8
+playsound note.flute @s[scores={upSound=4}] ~~~ 0.9 2.2
+playsound note.bit @s[scores={upSound=4}] ~~~ 0.9 2.2
+playsound note.xylophone @s[scores={upSound=12}] ~~~ 0.9 1.4
+playsound note.bit @s[scores={upSound=12}] ~~~ 0.9 2
+playsound note.bell @s[scores={upSound=12}] ~~~ 0.9 1.6
+playsound note.flute @s[scores={upSound=12}] ~~~ 0.9 2.0
+playsound note.flute @s[scores={upSound=12}] ~~~ 0.9 2.4
+playsound note.bd @s[scores={upSound=12}] ~~~ 0.9 2.4

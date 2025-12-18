@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:redstone_block","nameTag":"§r§6命の結晶","lore":["§r§7宝石だ。","§r§7体力が少し増える。","§r§7 使用時 ","§r§aHP +2","","§r§fアーティファクト : "]}

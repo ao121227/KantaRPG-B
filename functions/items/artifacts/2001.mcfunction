@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:amethyst_shard","nameTag":"§r§6毒除けクリスタル","lore":["§r§7重量感がある。","§r§7付けると毒を無効化する。","§r§7 使用時 ","§r§a毒を無効化する","","§r§fアーティファクト : "]}

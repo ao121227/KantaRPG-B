@@ -1,0 +1,2 @@
+scriptevent cg:give {"typeId":"minecraft:salmon","nameTag":"§r§2シャケ","lore":["§r§7大きい。","§r§f40§eG§7で売却可能","","§r§f釣りドロップ : "]}
+tellraw @s { "rawtext": [ { "text": "> §2「シャケ」§fを釣り上げた。" }] }

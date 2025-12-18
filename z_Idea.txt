@@ -1,0 +1,51 @@
+プレイヤー関連の検知可能なイベント (Player-Related Events)
+playerJoin: プレイヤーがワールドに参加したとき。
+playerLeave: プレイヤーがワールドから離れたとき。
+playerSpawn: プレイヤーがスポーンしたとき。
+playerBreakBlock: プレイヤーがブロックを破壊しようとしたとき (beforeEvents)。
+playerInteractWithBlock: プレイヤーがブロックとインタラクションしようとしたとき (beforeEvents)。
+playerInteractWithEntity: プレイヤーがエンティティとインタラクションしたとき (beforeEvents)。コード例: 村人と話す。
+playerPlaceBlock: プレイヤーがブロックを設置しようとしたとき (beforeEvents)。
+itemUse: プレイヤーがアイテムを使用したとき (afterEvents)。コード例: 魔法アイテムの使用。
+itemCompleteUse: プレイヤーがアイテムの使用を完了したとき (afterEvents)。コード例: 食べ物の消費。
+entityDie: プレイヤーが死亡したとき (afterEvents)。
+entityHurt: プレイヤーがダメージを受けたとき (afterEvents)。
+entityLoad: プレイヤーがロードされたとき (afterEvents)。
+entitySpawn: プレイヤーがスポーンしたとき (afterEvents)。
+
+●kb:jump [Xの割合] [Zの割合] [威力] [威力(Y)]
+3方向の値を指定してノックバックします
+【例: kb:jump 1 1 1 0.5】
+
+●kb:leap [威力] [威力(Y)]
+自身から見て前方へノックバックします
+【例: kb:leap 1 0.5】
+
+●kb:leap_straight [威力]
+自身から見て向いている方向へノックバックします
+(Y方向も視点から参照されます。動作が不安定なため使用は非推奨です)
+【例: kb:leap 2】
+
+●kb:dash [威力] [威力(Y)]
+移動している方向へノックバックします
+(現在の移動速度が参照されます。移動キーの入力は参照されません)
+【例: kb:leap 2 0.6】
+
+●kb:dash_straight [威力]
+移動している方向へノックバックします
+(現在の移動速度が参照されます。移動キーの入力は参照されません)
+(Y方向も移動速度から参照されます。動作が不安定なため使用は非推奨です)
+【例: kb:leap 2】
+
+●kb:knockback [“セレクター”] [威力] [威力(Y)] [任意: 発生源の座標X] [座標Y] [座標Z]
+セレクターに合うプレイヤーをノックバックさせます
+(セレクターは必ず””で囲んでください)
+(座標は必ずスペースで区切ってください。※座標は^には現在対応していません)
+【例: kb:knockback “@a[r=5]” 2.5 0.5 ~ ~-1000 ~】
+
+●kb:knockback_straight [“セレクター”] [威力] [任意: 発生源の座標X] [座標Y] [座標Z]
+セレクターに合うプレイヤーをノックバックさせます
+(セレクターは必ず””で囲んでください)
+(座標は必ずスペースで区切ってください。※座標は^には現在対応していません)
+(Y方向も発生源の位置から参照されます)
+【例: kb:knockback “@a[r=5]” -1 ~ ~-1000 ~】

@@ -1,0 +1,1 @@
+execute as @a[hasitem={item=minecraft:stone_sword,location=slot.weapon.mainhand}] at @s run scriptevent item:needLv {"slot":"mainHand","name":"§r§2石の剣","lv":5}

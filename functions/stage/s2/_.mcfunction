@@ -1,0 +1,2 @@
+execute unless entity @a[tag=reset] if entity @a[r=8,m=adventure] if block ~~1~ minecraft:dead_brain_coral_block unless entity @e[tag=monster,r=4] run function stage/s2/spawn
+execute if entity @a[tag=reset] run setblock ~~1~ minecraft:dead_brain_coral_block

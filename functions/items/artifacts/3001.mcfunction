@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:end_crystal","nameTag":"§r§d魔法のクリスタル","lore":["§r§7とてもキレイだ。","§r§7魔法系のステータスが上昇する。","§r§7 使用時 ","§r§aMP最大 +10MP","§r§aMP回復速度 +4/1000","","§r§fアーティファクト : "]}

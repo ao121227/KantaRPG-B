@@ -1,0 +1,1 @@
+execute if score @s village matches 1 run scriptevent fishing:loot {"sort":"gold","LR1":500,"LR2":2000}

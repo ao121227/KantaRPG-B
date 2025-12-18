@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:nether_star","nameTag":"§r§7オペレーターメニュー"}

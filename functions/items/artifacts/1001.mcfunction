@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:feather","nameTag":"§r§2すばやさのはね","lore":["§r§7とても軽い。","§r§7付けるとすばやくなる。","§r§7 使用時 ","§r§aSPD +1","","§r§fアーティファクト : "]}

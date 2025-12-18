@@ -1,0 +1,1 @@
+scriptevent cg:give {"typeId":"minecraft:wooden_shovel","nameTag":"§r§f木の杖","lore":["§r§7先が丸くなっている。","§r§7複数の敵を安全に倒せる。","§r§7 使用時 ","§r§aATK +4, §cMP -4","","§r§f杖 : "],"enchants": [{"name": "mending", "level": 1}]}
