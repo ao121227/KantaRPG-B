@@ -898,7 +898,6 @@ function opMenu(player) {
                 if (res.selection == 0) {
                   player.runCommand(`function reset`)
                   player.sendMessage(`> §sステータス§fを§sリセット§fしました`)
-                  player.playSound(`random.totem`)
                 }
               })
         }
