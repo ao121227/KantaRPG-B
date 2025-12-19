@@ -1,5 +1,5 @@
 execute as @a at @s run function lv/_
-execute as @a at @s run function actionbar
+execute as @a[tag=!worldedit] at @s run function actionbar
 function status/_
 function stage/_
 function mob/system/_

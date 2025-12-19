@@ -245,13 +245,19 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     const m = JSON.parse(message)
     const objectXP = world.scoreboard.getObjective("xpBonus");
     const scoreXP = objectXP.getScore(player.scoreboardIdentity) | 0;
-    const xpBonusP = (100 + scoreXP) / 100
-    const giveXp = Math.floor(Number(m.xp)*xpBonusP)
-    const xpBonus = giveXp - Number(m.xp)
+    const objectLv = world.scoreboard.getObjective("nowLv");
+    const scoreLv = objectLv.getScore(player.scoreboardIdentity) | 0;
+    let xpBonusP = (100 + scoreXP) / 100
+    let giveXp = Math.floor(Number(m.xp)*xpBonusP)
+    let xpBonus = giveXp - Number(m.xp)
+    let g = Number(m.g)
+    let xp = Number(m.xp)
+    if (scoreLv >= 50) xp = "MAX"
     player.runCommand(`scoreboard players add @s nowXp ${giveXp}`)
-    player.runCommand(`scoreboard players add @s G ${Number(m.g)}`)
-    if (xpBonus == 0) player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${Number(m.xp)}§aXP\n§6獲得ゴールド: §f${Number(m.g)}§eG" ^^^2.5`)
-      else player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${Number(m.xp)}+${xpBonus}§aXP\n§6獲得ゴールド: §f${Number(m.g)}§eG" ^^^2.5`)
+    player.runCommand(`scoreboard players add @s G ${g}`)
+    if (scoreLv >= 50) player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${xp}\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
+      else if (xpBonus == 0) player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${xp}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
+      else player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${xp}+${xpBonus}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
   }
 
   if (ev.id === `r:tp`) {
