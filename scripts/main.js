@@ -865,6 +865,7 @@ function opMenu(player) {
       .button(`4. 武器メニューを開く`)
       .button(`5. アーティファクトメニューを開く`)
       .button(`6. パッチノート`)
+      .button(`7. ステータスをリセットする`)
       .show(player).then((res) => {
         switch (res.selection) {
           case 0:
@@ -887,6 +888,19 @@ function opMenu(player) {
           case 5:
             patchNote(player)
             break;
+          case 6:
+            const message = new mcui.MessageFormData()
+              .title(`ステータスリセット確認`)
+              .body(`本当にステータスをリセットしますか？`)
+              .button1(`はい`)
+              .button2(`いいえ`)
+              .show(player).then((res) => {
+                if (res.selection == 0) {
+                  player.runCommand(`function reset`)
+                  player.sendMessage(`> §sステータス§fを§sリセット§fしました`)
+                  player.playSound(`random.totem`)
+                }
+              })
         }
       })
 }
