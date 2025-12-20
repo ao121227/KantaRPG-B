@@ -7,5 +7,5 @@ execute if score @s random matches 51..56 run structure load "loot:0034" ~ ~1 ~
 execute if score @s random matches 77 run structure load "loot:0035" ~ ~1 ~
 scoreboard players add @a[r=4] nowMp 7
 playsound random.orb @a[r=4] ~~~ 0.2 1
-execute as @a[r=4] at @s run scriptevent status:result {"xp":7,"g":3}
+execute as @p at @s run scriptevent status:result {"xp":7,"g":3}
 execute as @a[r=4] at @s unless score @s vampire matches 0 run scriptevent status:vampire 0

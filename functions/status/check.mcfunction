@@ -13,4 +13,6 @@ tellraw @s { "rawtext": [{ "text": " ・ §a現在レベル: Lv." }, { "score": 
 tellraw @s { "rawtext": [{ "text": " ・ §c最大体力: " }, { "score": { "name": "@s", "objective": "checkHp" } },{ "text": "HP§f  ・ §3最大マジックポイント: " }, { "score": { "name": "@s", "objective": "maxMp" } },{ "text": "MP" } ] }
 tellraw @s { "rawtext": [{ "text": " ・ §b移動速度: " }, { "score": { "name": "@s", "objective": "spd" } },{ "text": "SPD§f  ・ §3マジックポイント回復速度: " }, { "score": { "name": "@s", "objective": "regenMp" } },{ "text": "/1000" } ] }
 tellraw @s { "rawtext": [{ "text": " ・ §4吸血確率: " }, { "score": { "name": "@s", "objective": "vampire" } },{ "text": "%§f  ・ §bXPボーナス: +" },{ "score": {"name": "@s", "objective": "xpBonus" } },{ "text": "%" }] }
+tellraw @s[tag=protection] { "rawtext": [{ "text": " ・ §6ジョブ: §3プロテクション" }] }
+tellraw @s[tag=strong] { "rawtext": [{ "text": " ・ §6ジョブ: §4ストロング" }] }
 scriptevent r:artifact

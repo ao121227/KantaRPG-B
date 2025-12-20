@@ -841,6 +841,9 @@ function dropSell(player,itemname) {
             player.sendMessage(`> §4売れるアイテムではありません！`)
             player.playSound(`click_on.bamboo_wood_button`)
           }
+      } else {
+        player.sendMessage(`> §4売却可能なアイテムを手に持つと売ることができる`)
+        player.playSound(`click_on.bamboo_wood_button`)
       }
     }
 }
