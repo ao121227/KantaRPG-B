@@ -544,8 +544,8 @@ world.afterEvents.playerSwingStart.subscribe(ev => {
   const itemStack = ev.heldItemStack || `なし`;
   const swingSource = ev.swingSource || `なし`;
   // test
-  if (player.hasTag("swingTest")) player.sendMessage(`§lswing!§r\nitemStack.typeId: ${itemStack.typeId}\nitemStack.nameTag: ${itemStack.nameTag}§r\nswingSource: ${swingSource}`);
-
+  if (player.hasTag("swingtest")) player.sendMessage(`§lswing!§r\nitemStack.typeId: ${itemStack.typeId}\nitemStack.nameTag: ${itemStack.nameTag}§r\nswingSource: ${swingSource}`);
+  if (swingSource == "Attack") {
   switch (itemStack.nameTag) {
     // 杖
     case "§r§f木の杖":
@@ -569,6 +569,7 @@ world.afterEvents.playerSwingStart.subscribe(ev => {
       player.playSound(`click_on.bamboo_wood_button`)
     }
   }
+}
 })
 
 
