@@ -18,7 +18,7 @@ scoreboard objectives add magicArmorTime dummy
 scoreboard objectives add magicCoolDown dummy
 scoreboard objectives add village dummy
 function status/score
-function items/magic_command/score
+function magicFunction/score
 function lv/score
 function items/fishing/score
 function enderChest/score

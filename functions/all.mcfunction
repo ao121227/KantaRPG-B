@@ -5,7 +5,7 @@ function stage/_
 function mob/system/_
 function crafting/_
 function magicCrafting/_
-function items/magic_command/_
+function magicFunction/_
 function items/weapon/system
 function dungeons/_
 execute as @a at @s run function mana

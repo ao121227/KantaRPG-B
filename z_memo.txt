@@ -28,7 +28,7 @@
 防具: scriptevent item:needLv {"slot":"armor","name":"防具名","lv":必要レベル}
 武器: scriptevent item:needLv {"slot":"mainHand","name":"武器名","lv":必要レベル}
     　main.jsのplayerSwingStartのところの剣の攻撃可能確認というメモがついてる場所にプログラムを追加する
-杖: 杖のfunction(例: items/magic_command/wand/2200.stonewand/_)にレベルのコマンドを付け足す
+杖: 杖のfunction(例: magicFunction/wand/2200.stonewand/_)にレベルのコマンドを付け足す
 
 **モブの作成方法**
 1. モブをスポーンさせる（例: /summon skeleton 名前）

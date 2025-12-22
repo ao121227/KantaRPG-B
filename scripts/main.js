@@ -467,44 +467,44 @@ world.afterEvents.itemUse.subscribe(evd => {
 
   // 魔法
   if (evd.itemStack.nameTag === '§r§4ファイアボール') { 
-    player.runCommand(`function items/magic_command/magic/1001.fireball/_`)
+    player.runCommand(`function magicFunction/magic/1001.fireball/_`)
   }
   if (evd.itemStack.nameTag === '§r§4円火') { 
-    player.runCommand(`function items/magic_command/magic/1101.circlefire/_`)
+    player.runCommand(`function magicFunction/magic/1101.circlefire/_`)
   }
   if (evd.itemStack.nameTag === '§r§4ファイアウォール') { 
-    player.runCommand(`function items/magic_command/magic/1102.firewall/_`)
+    player.runCommand(`function magicFunction/magic/1102.firewall/_`)
   }
   if (evd.itemStack.nameTag === '§r§3ウォーターボール') {
-    player.runCommand(`function items/magic_command/magic/2001.waterball/_`)
+    player.runCommand(`function magicFunction/magic/2001.waterball/_`)
   }
   if (evd.itemStack.nameTag === '§r§3水責め') {
-    player.runCommand(`function items/magic_command/magic/2101.waterattack/_`)
+    player.runCommand(`function magicFunction/magic/2101.waterattack/_`)
   }
   if (evd.itemStack.nameTag === '§r§nアースボール') {
-    player.runCommand(`function items/magic_command/magic/3001.earthball/_`)
+    player.runCommand(`function magicFunction/magic/3001.earthball/_`)
   }
   if (evd.itemStack.nameTag === '§r§eミニヒール') {
-    player.runCommand(`function items/magic_command/magic/4101.miniheal/_`)
+    player.runCommand(`function magicFunction/magic/4101.miniheal/_`)
   }
   if (evd.itemStack.nameTag === '§r§eヒール') {
-    player.runCommand(`function items/magic_command/magic/4201.heal/_`)
+    player.runCommand(`function magicFunction/magic/4201.heal/_`)
   }
   if (evd.itemStack.nameTag === '§r§aウィンドボール') {
-    player.runCommand(`function items/magic_command/magic/5001.windball/_`)
+    player.runCommand(`function magicFunction/magic/5001.windball/_`)
   }
   if (evd.itemStack.nameTag === '§r§aウィンドウォール') {
-    player.runCommand(`function items/magic_command/magic/5101.windwall/_`)
+    player.runCommand(`function magicFunction/magic/5101.windwall/_`)
   }
   if (evd.itemStack.nameTag === '§r§fスーパーステップ') {
-    player.runCommand(`function items/magic_command/magic/6001.superstep/_`)
+    player.runCommand(`function magicFunction/magic/6001.superstep/_`)
   }
   if (evd.itemStack.nameTag === '§r§fパワー！！') {
-    player.runCommand(`function items/magic_command/magic/6101.power/_`)
+    player.runCommand(`function magicFunction/magic/6101.power/_`)
   }
   if (evd.itemStack.nameTag === '§r§nうんこクリスタルボール') {
     if (isKanataArmor) {
-      player.runCommand(`function items/magic_command/magic/7001.poopball/_`)
+      player.runCommand(`function magicFunction/magic/7001.poopball/_`)
     } else {
       player.sendMessage(`> §r§4カナタ装備フルでないと使用できません。`)
       player.playSound(`click_on.bamboo_wood_button`);
@@ -549,13 +549,13 @@ world.afterEvents.playerSwingStart.subscribe(ev => {
   switch (itemStack.nameTag) {
     // 杖
     case "§r§f木の杖":
-      player.runCommand(`function items/magic_command/wand/1200.woodwand/_`)
+      player.runCommand(`function magicFunction/wand/1200.woodwand/_`)
       break;
     case "§r§2石の杖":
-      player.runCommand(`function items/magic_command/wand/2200.stonewand/_`)
+      player.runCommand(`function magicFunction/wand/2200.stonewand/_`)
       break;
     case "§r§6爆発の杖":
-      player.runCommand(`function items/magic_command/wand/3200.explosivewand/_`)
+      player.runCommand(`function magicFunction/wand/3200.explosivewand/_`)
       break;
 
     // 剣の発動確認
