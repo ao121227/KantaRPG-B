@@ -549,13 +549,13 @@ world.afterEvents.playerSwingStart.subscribe(ev => {
   switch (itemStack.nameTag) {
     // 杖
     case "§r§f木の杖":
-      player.runCommand(`function items/magic_command/wand/1200/_`)
+      player.runCommand(`function items/magic_command/wand/1200.woodwand/_`)
       break;
     case "§r§2石の杖":
-      player.runCommand(`function items/magic_command/wand/2200/_`)
+      player.runCommand(`function items/magic_command/wand/2200.stonewand/_`)
       break;
     case "§r§6爆発の杖":
-      player.runCommand(`function items/magic_command/wand/3200/_`)
+      player.runCommand(`function items/magic_command/wand/3200.explosivewand/_`)
       break;
 
     // 剣の発動確認
@@ -933,10 +933,10 @@ function dropItemMenu(player) {
 }
 function weaponItemMenu(player) {
   const items = [
-    "木の剣","木の杖","石の剣","石の杖"
+    "木の剣","木の杖","石の剣","石の杖","爆発の杖"
   ]
   const itemsId = [
-    "items/weapon/1100","items/weapon/1200","weapon:2100","weapon:2200"
+    "items/weapon/1100","items/weapon/1200","weapon:2100","weapon:2200","weapon:3200"
   ]
   const form = new mcui.ActionFormData()
       .title(`武器メニュー`)

@@ -1,5 +1,5 @@
-execute as @e[type=minecraft:armor_stand,name=w1200] at @s run function items/magic_command/wand/1200/armor_stand
-execute as @e[type=minecraft:armor_stand,name=w2200] at @s run function items/magic_command/wand/2200/armor_stand
+execute as @e[type=minecraft:armor_stand,name=w1200] at @s run function items/magic_command/wand/1200.woodwand/armor_stand
+execute as @e[type=minecraft:armor_stand,name=w2200] at @s run function items/magic_command/wand/2200.stonewand/armor_stand
 execute as @e[type=minecraft:armor_stand,name=m1001] at @s run function items/magic_command/magic/1001.fireball/armor_stand
 execute as @e[type=minecraft:armor_stand,name=m1102] at @s run function items/magic_command/magic/1102.firewall/armor_stand
 execute as @e[type=minecraft:armor_stand,name=m2001] at @s run function items/magic_command/magic/2001.waterball/armor_stand
