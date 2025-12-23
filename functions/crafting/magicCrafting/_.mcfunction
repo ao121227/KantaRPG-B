@@ -1,0 +1,1 @@
+execute positioned -28 -55 -55 run function crafting/magicCrafting/__

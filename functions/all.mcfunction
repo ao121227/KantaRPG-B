@@ -4,7 +4,7 @@ function status/_
 function stage/_
 function mob/system/_
 function crafting/_
-function magicCrafting/_
+function crafting/magicCrafting/_
 function magicFunction/_
 function items/weapon/system
 function dungeons/_
