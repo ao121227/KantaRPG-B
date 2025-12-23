@@ -84,7 +84,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
       case "test2":
         lootName = ["§2ハスクの硬肉","§2砂","§6金のニンジン","§6火の欠片","§6命の結晶"]
         lootRare = ["uncommon","uncommon","uncommon","unique","unique","unique"]
-        lootStructure = ["loot:0032","loot:0033","loot:0034","loot:0035","items/artifacts/2002"]
+        lootStructure = ["loot:0032","loot:0033","loot:0034","loot:0035","items/artifacts/2002.lifecrystal"]
         lootRareNumber = 2
         break;
       case "none":
@@ -389,9 +389,9 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
       }
       function v1() {
         player.runCommand(`scoreboard players random @s fishing 1 100`)
-        player.runCommand(`execute if score @s fishing matches ..${Number(fishingData.LR1)} run function items/fishing/loot/fish/1001`)
-        player.runCommand(`execute if score @s fishing matches ${Number(fishingData.LR1) + 1}..${Number(fishingData.LR2)} run function items/fishing/loot/fish/1002`)
-        player.runCommand(`execute if score @s fishing matches ${Number(fishingData.LR2) + 1}.. run function items/fishing/loot/fish/1101`)
+        player.runCommand(`execute if score @s fishing matches ..${Number(fishingData.LR1)} run function items/fishing/loot/fish/1001.tara`)
+        player.runCommand(`execute if score @s fishing matches ${Number(fishingData.LR1) + 1}..${Number(fishingData.LR2)} run function items/fishing/loot/fish/1002.wakame`)
+        player.runCommand(`execute if score @s fishing matches ${Number(fishingData.LR2) + 1}.. run function items/fishing/loot/fish/1101.shake`)
         player.runCommand(`scoreboard players reset @s fishing`)
       }
     } else if (fishingData.sort == "gold") {
@@ -936,7 +936,7 @@ function weaponItemMenu(player) {
     "木の剣","木の杖","石の剣","石の杖","爆発の杖"
   ]
   const itemsId = [
-    "items/weapon/1100","items/weapon/1200","weapon:2100","weapon:2200","weapon:3200"
+    "items/weapon/1100.woodsword","items/weapon/1200.woodwand","weapon:2100","weapon:2200","weapon:3200"
   ]
   const form = new mcui.ActionFormData()
       .title(`武器メニュー`)
@@ -957,10 +957,10 @@ function artifactItemMenu(player) {
     "魔法のクリスタル"
   ]
   const itemsId = [
-    "items/artifacts/0000","items/artifacts/0001",
-    "items/artifacts/1001",
-    "items/artifacts/2001","items/artifacts/2002","items/artifacts/2003",
-    "items/artifacts/3001"
+    "items/artifacts/0000.statuschecker","items/artifacts/0001.opmenu",
+    "items/artifacts/1001.speedfeather",
+    "items/artifacts/2001.poisoncrystal","items/artifacts/2002.lifecrystal","items/artifacts/2003.broodpowder",
+    "items/artifacts/3001.magiccrystal"
   ]
   const form = new mcui.ActionFormData()
       .title(`アーティファクトメニュー`)

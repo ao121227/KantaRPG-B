@@ -93,19 +93,19 @@ loots----------------------------------------------------
 金のりんご 150G loot:0044
 
 weapon----------------------------------------------------
-木の剣 items/weapon/1100
-木の杖 items/weapon/1200
+木の剣 items/weapon/1100.woodsword
+木の杖 items/weapon/1200.woodwand
 石の剣 weapon:2100
 石の杖 weapon:2200
 
 artifacts----------------------------------------------------
-ステータス確認 items/artifacts/0000
-オペレーターメニュー items/artifacts/0001
-すばやさのはね items/artifacts/1001
-毒除けクリスタル items/artifacts/2001
-命の結晶 items/artifacts/2002
-吸血の粉 items/artifacts/2003
-魔法のクリスタル items/artifacts/3001
+ステータス確認 items/artifacts/0000.statuschecker
+オペレーターメニュー items/artifacts/0001.opmenu
+すばやさのはね items/artifacts/1001.speedfeather
+毒除けクリスタル items/artifacts/2001.poisoncrystal
+命の結晶 items/artifacts/2002.lifecrystal
+吸血の粉 items/artifacts/2003.broodpowder
+魔法のクリスタル items/artifacts/3001.magiccrystal
 
 armors----------------------------------------------------
 ゾンビ防具 crafting:0011
@@ -136,9 +136,9 @@ magic----------------------------------------------------
 うんこクリスタル magic:7001
 
 fish---------------------------------------------------
-タラ 25G items/fishing/loot/fish/1001
-わかめ 20G items/fishing/loot/fish/1002
-シャケ 40G items/fishing/loot/fish/1101
+タラ 25G items/fishing/loot/fish/1001.tara
+わかめ 20G items/fishing/loot/fish/1002.wakame
+シャケ 40G items/fishing/loot/fish/1101.shake
 
 others----------------------------------------------------
 うすっぺらいレシピ本 "著作 料理研究家 リュ〇ジ" recipe:0011
