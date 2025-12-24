@@ -1026,7 +1026,9 @@ function patchNote(player) {
     `アプデでLootTableがバグっていたためscriptで死んだらドロップさせるように変更`,
     `オペレーターメニューを追加`,
     `杖の攻撃方法を使用検知から攻撃検知に変更`,
-    `レベル上限（50Lvまで）追加`
+    `レベル上限（50Lvまで）追加`,
+    `bgm追加`,
+    `モンスターを倒した時のXPなどの入手を@pに変更`
   ]
   form.title(`パッチノート`)
   for (let i = patchNote.length; i > 0; i--) {
