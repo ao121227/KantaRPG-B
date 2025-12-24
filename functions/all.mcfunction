@@ -8,6 +8,7 @@ function crafting/magicCrafting/_
 function magicFunction/_
 function items/weapon/system
 function dungeons/_
+function music/_
 execute as @a at @s run function mana
 effect @a saturation 1 0 true
 effect @a hunger 1 255 true
@@ -30,6 +31,7 @@ clear @a minecraft:bowl
 tag @a add death
 tag @e[type=player] remove death
 execute as @a[tag=!death2,tag=death] at @s run function death
+scoreboard players set @a[tag=death] music -20
 tag @a[tag=death] add death2
 tag @e[type=player] remove death2
 effect @a[tag=deathHealth] instant_health 1 255 true

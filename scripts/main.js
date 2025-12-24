@@ -316,6 +316,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
       player.runCommand(`title @s title §a荒廃した地底`);
       player.runCommand(`title @s subtitle §4危険度 Lv.17`);
   }
+  player.runCommand(`scoreboard players set @s music -20`)
 }
   if (ev.id === `r:spawnpoint`) {
     if (message == 0) {
@@ -531,10 +532,12 @@ world.afterEvents.itemCompleteUse.subscribe(ev => {
 world.afterEvents.entityDie.subscribe(ev => {
   const entity = ev.deadEntity;
   if (entity) {
-    if (entity.hasTag("mob:001")) entity.runCommand(`function mob/drop/m001`);
-    if (entity.hasTag("mob:002")) entity.runCommand(`function mob/drop/m002`);
-    if (entity.hasTag("mob:003")) entity.runCommand(`function mob/drop/m003`);
-    if (entity.hasTag("mob:004")) entity.runCommand(`function mob/drop/m004`);
+    if (playerQuery(entity,30)) {
+      if (entity.hasTag("mob:001")) entity.runCommand(`function mob/drop/m001`);
+      if (entity.hasTag("mob:002")) entity.runCommand(`function mob/drop/m002`);
+      if (entity.hasTag("mob:003")) entity.runCommand(`function mob/drop/m003`);
+      if (entity.hasTag("mob:004")) entity.runCommand(`function mob/drop/m004`);
+    }
   }
 });
 world.afterEvents.playerSwingStart.subscribe(ev => {
@@ -570,6 +573,15 @@ world.afterEvents.playerSwingStart.subscribe(ev => {
     }
   }
 }
+})
+world.afterEvents.playerSpawn.subscribe((ev) => {
+  const { player, initialSpawn } = ev;
+  if (initialSpawn) {
+    const objective = world.scoreboard.getObjective("music");
+    if (objective) {
+      objective.setScore(player, -100);
+    }
+  }
 })
 
 
@@ -1023,4 +1035,12 @@ function patchNote(player) {
     .divider()
   }
   form.show(player)
+}
+function playerQuery(player,radius) {
+  const overworld = world.getDimension("overworld");
+  const query = {
+    location: player.location,
+    maxDistance: radius
+  }
+  return (overworld.getPlayers(query).length >= 1);
 }
