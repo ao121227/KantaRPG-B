@@ -10,3 +10,6 @@ scoreboard players add @a[r=4] nowMp 5
 playsound random.orb @a[r=4] ~~~ 0.2 1
 execute as @p at @s run scriptevent status:result {"xp":5,"g":2}
 execute as @a[r=4] at @s unless score @s vampire matches 0 run scriptevent status:vampire 0
+summon minecraft:xp_orb
+summon minecraft:xp_orb
+summon minecraft:xp_orb

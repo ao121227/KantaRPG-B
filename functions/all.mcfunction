@@ -63,13 +63,14 @@ kill @e[type=minecraft:item,name=other,tag=nowFishing]
 # enderChest
 execute as @a at @s run function enderChest/_
 
-# xpBonus
+# clear
 execute as @e[type=borak:floating_text] at @s run scoreboard players add @s clear 1
 execute as @e[tag=openchest] at @s run scoreboard players add @s clear 1
 execute as @e[type=borak:floating_text,scores={clear=30..}] at @s run tp @s ~ -1000 ~
 execute as @e[type=borak:floating_text,scores={clear=40..}] at @s run kill @s
 execute as @e[tag=openchest,scores={clear=1..}] at @s run tp @s ~ 1000 ~
 execute as @e[tag=openchest,scores={clear=10..}] at @s run kill @s
+xp -1000L @a
 
 # campfire
 execute positioned -68.45 -42.56 -4.39 run effect @a[r=3] regeneration 3 1 true
