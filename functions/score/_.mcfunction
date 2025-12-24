@@ -25,3 +25,4 @@ function enderChest/score
 function job/score
 function dungeons/treasurechest/score
 function music/score
+function xpbar/score

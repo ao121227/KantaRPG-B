@@ -9,6 +9,7 @@ function magicFunction/_
 function items/weapon/system
 function dungeons/_
 function music/_
+execute as @a at @s run function xpbar/_
 execute as @a at @s run function mana
 effect @a saturation 1 0 true
 effect @a hunger 1 255 true
@@ -70,7 +71,6 @@ execute as @e[type=borak:floating_text,scores={clear=30..}] at @s run tp @s ~ -1
 execute as @e[type=borak:floating_text,scores={clear=40..}] at @s run kill @s
 execute as @e[tag=openchest,scores={clear=1..}] at @s run tp @s ~ 1000 ~
 execute as @e[tag=openchest,scores={clear=10..}] at @s run kill @s
-xp -1000L @a
 
 # campfire
 execute positioned -68.45 -42.56 -4.39 run effect @a[r=3] regeneration 3 1 true
@@ -78,8 +78,3 @@ execute positioned -68.45 -42.56 -4.39 run effect @a[r=3] regeneration 3 1 true
 # sneakTag
 tag @a remove sneak
 execute as @a at @s if entity @s[y=~1.4,dx=0] unless entity @s[y=~1.5,dx=0] run tag @s add sneak
-
-# snowball
-#execute as @e[type=minecraft:snowball] at @s unless block ~~-1~ air run fill ~2~~2~-2~~-2 minecraft:sand replace air
-#execute as @e[type=minecraft:snowball] at @s unless block ~~-1~ air run kill @s
-#execute as @e[type=minecraft:snowball] at @s run fill ~4~4~4~-4~-4~-4 stone replace sand

@@ -42,6 +42,15 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     let s = score / 20
     player.sendMessage(`> §4クールダウン中！§7 ( 残り: §e${s}s§r§7 )`)
   }
+  if (ev.id === `xpbar:point`) {
+    const objectNow = world.scoreboard.getObjective("nowMp");
+    const objectMax = world.scoreboard.getObjective("maxMp");
+    const scoreNow = objectNow.getScore(player.scoreboardIdentity);
+    const scoreMax = objectMax.getScore(player.scoreboardIdentity);
+    const percent = Math.floor((scoreNow / scoreMax) * 1000)
+    player.runCommand(`xp ${percent} @s`)
+    player.sendMessage(`${percent}`)
+  }
 
   if (ev.id === `dungeon:setRare`) {
     switch (message) {
