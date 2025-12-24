@@ -882,7 +882,9 @@ function opMenu(player) {
       .button(`5. アーティファクトメニューを開く`)
       .button(`6. パッチノート`)
       .button(`7. ステータスをリセットする`)
-      .show(player).then((res) => {
+      if (player.hasTag("bgmStop")) form.button(`8. BGMをオンにする`)
+        else form.button(`8. BGMをオフにする`)
+      form.show(player).then((res) => {
         switch (res.selection) {
           case 0:
             player.runCommand(`gamemode creative`)
@@ -916,6 +918,21 @@ function opMenu(player) {
                   player.sendMessage(`> §sステータス§fを§sリセット§fしました`)
                 }
               })
+            break;
+          case 7:
+            if (player.hasTag("bgmStop")) {
+              player.runCommand(`tag @s remove bgmStop`)
+              player.runCommand(`scoreboard players set @s music -20`)
+              player.sendMessage(`> §sBGM§fを§sオン§fにしました`)
+              player.playSound(`random.orb`)
+            }
+              else {
+                player.runCommand(`tag @s add bgmStop`)
+                player.runCommand(`scoreboard players set @s music -20`)
+                player.runCommand(`function music/stop`)
+                player.sendMessage(`> §sBGM§fを§sオフ§fにしました`)
+                player.playSound(`random.orb`)
+              }
         }
       })
 }
