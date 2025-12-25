@@ -586,7 +586,7 @@ world.afterEvents.playerSwingStart.subscribe(ev => {
 world.afterEvents.playerSpawn.subscribe((ev) => {
   const { player, initialSpawn } = ev;
 
-  // プレイヤーがワールドに入った際[スコアボードmusic]を-100にする
+  // プレイヤーがワールドに入った際 スコアmusic を -100 にする
   if (initialSpawn) {
     const objective = world.scoreboard.getObjective("music");
     if (objective) {
