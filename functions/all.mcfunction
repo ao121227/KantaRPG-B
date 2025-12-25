@@ -65,10 +65,10 @@ kill @e[type=minecraft:item,name=other,tag=nowFishing]
 execute as @a at @s run function enderChest/_
 
 # clear
-execute as @e[type=borak:floating_text] at @s run scoreboard players add @s clear 1
+execute as @e[type=rpg:result] at @s run scoreboard players add @s clear 1
 execute as @e[tag=openchest] at @s run scoreboard players add @s clear 1
-execute as @e[type=borak:floating_text,scores={clear=30..}] at @s run tp @s ~ -1000 ~
-execute as @e[type=borak:floating_text,scores={clear=40..}] at @s run kill @s
+execute as @e[type=rpg:result,scores={clear=30..}] at @s run tp @s ~ -1000 ~
+execute as @e[type=rpg:result,scores={clear=40..}] at @s run kill @s
 execute as @e[tag=openchest,scores={clear=1..}] at @s run tp @s ~ 1000 ~
 execute as @e[tag=openchest,scores={clear=10..}] at @s run kill @s
 

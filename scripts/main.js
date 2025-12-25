@@ -265,9 +265,9 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     if (scoreLv >= 50) xp = "MAX"
     player.runCommand(`scoreboard players add @s nowXp ${giveXp}`)
     player.runCommand(`scoreboard players add @s G ${g}`)
-    if (scoreLv >= 50) player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${xp}\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
-      else if (xpBonus == 0) player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${xp}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
-      else player.runCommand(`execute positioned ~~1~ run summon borak:floating_text "§2獲得経験値: §f${xp}+${xpBonus}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
+    if (scoreLv >= 50) player.runCommand(`execute positioned ~~1~ run summon rpg:result "§2獲得経験値: §f${xp}\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
+      else if (xpBonus == 0) player.runCommand(`execute positioned ~~1~ run summon rpg:result "§2獲得経験値: §f${xp}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
+      else player.runCommand(`execute positioned ~~1~ run summon rpg:result "§2獲得経験値: §f${xp}+${xpBonus}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
   }
 
   if (ev.id === `r:tp`) {
@@ -1063,7 +1063,7 @@ function patchNote(player) {
     `マナの表示方法をアクションバーから経験値バーに変更`,
     `経験値バーの見た目変更`,
     `アクションバーにあった縦棒の削除`,
-    `HPバーの見た目変更`,
+    `名前の上のHPバーの見た目変更`,
     `魔法クールダウンの終了通知追加`
   ]
   form.title(`パッチノート`)
