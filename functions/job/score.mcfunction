@@ -2,9 +2,7 @@ scoreboard objectives add strong_nowLv dummy
 scoreboard objectives add strong_nowXp dummy
 scoreboard objectives add strong_needXp dummy
 scoreboard objectives add strong_G dummy
-scoreboard objectives add strong_maxMp dummy
 scoreboard objectives add protection_nowLv dummy
 scoreboard objectives add protection_nowXp dummy
 scoreboard objectives add protection_needXp dummy
 scoreboard objectives add protection_G dummy
-scoreboard objectives add protection_maxMp dummy
