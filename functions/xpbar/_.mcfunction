@@ -8,6 +8,8 @@ scoreboard players set @s n1000 1000
 scoreboard players operation @s xpbar_nowMp *= @s n1000
 scoreboard players operation @s xpbar_nowMp /= @s xpbar_maxMp
 scoreboard players operation @s xpbar = @s xpbar_nowMp
+# マナが最大マナを超えていた場合千分率を1000にする
+execute if score @s nowMp > @s maxMp run scoreboard players set @s xpbar 1000
 # 千分率をポイントに代入
 execute if score @s xpbar matches 512.. run xp 512 @s
 execute if score @s xpbar matches 512.. run scoreboard players remove @s xpbar 512
