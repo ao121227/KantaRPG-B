@@ -596,6 +596,36 @@ world.afterEvents.playerSpawn.subscribe((ev) => {
     }
   }
 })
+world.afterEvents.entityHurt.subscribe((event) => {
+    const { hurtEntity, damage } = event;
+    const dimension = hurtEntity.dimension;
+    const location = hurtEntity.location;
+
+    // 半径0.5の範囲で座標をランダムに計算
+    // Math.random() * 1 - 0.5 で -0.5 ～ +0.5 の値を作ります
+    const randomX = (Math.random() - 0.5); 
+    const randomZ = (Math.random() - 0.5);
+
+    const spawnLocation = {
+        x: location.x + randomX,
+        y: location.y + 1.5, // 頭上1.5の位置
+        z: location.z + randomZ
+    };
+    if (!hurtEntity.hasTag("monster")) return;
+    try {
+        const indicator = dimension.spawnEntity("rpg:damage", spawnLocation);
+        
+        // ダメージ数値を設定
+        indicator.nameTag = `§c-${Math.floor(damage)}`;
+
+        // ランダムな方向を向かせる (0度 ～ 360度)
+        const randomRotation = Math.random() * 360;
+        indicator.setRotation({ x: 0, y: randomRotation });
+
+    } catch (e) {
+        console.warn("rpg:damageのスポーンに失敗しました: " + e);
+    }
+});
 
 
 function CreatedropItemMenu(player) {

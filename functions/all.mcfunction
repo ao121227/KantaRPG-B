@@ -66,9 +66,16 @@ execute as @a at @s run function enderChest/_
 
 # clear
 execute as @e[type=rpg:result] at @s run scoreboard players add @s clear 1
+execute as @e[type=rpg:damage] at @s run scoreboard players add @s clear 1
 execute as @e[tag=openchest] at @s run scoreboard players add @s clear 1
+execute as @e[type=rpg:damage,scores={clear=1..4}] at @s run tp @s ~~0.3~
+execute as @e[type=rpg:damage,scores={clear=5..6}] at @s run tp @s ~~0.4~
+execute as @e[type=rpg:damage,scores={clear=7..8}] at @s run tp @s ~~-0.5~
+execute as @e[type=rpg:damage,scores={clear=1..8}] at @s run tp @s ^^^0.1
 execute as @e[type=rpg:result,scores={clear=30..}] at @s run tp @s ~ -1000 ~
 execute as @e[type=rpg:result,scores={clear=40..}] at @s run kill @s
+execute as @e[type=rpg:damage,scores={clear=10..}] at @s run tp @s ~ -1000 ~
+execute as @e[type=rpg:damage,scores={clear=20..}] at @s run kill @s
 execute as @e[tag=openchest,scores={clear=1..}] at @s run tp @s ~ 1000 ~
 execute as @e[tag=openchest,scores={clear=10..}] at @s run kill @s
 
