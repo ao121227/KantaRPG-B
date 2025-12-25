@@ -1060,11 +1060,13 @@ function patchNote(player) {
     `オペレーターメニューにbgmのオン/オフ追加`,
     `マナの表示方法をアクションバーから経験値バーに変更`,
     `経験値バーの見た目変更`,
-    `アクションバーにあった縦棒の削除`
+    `アクションバーにあった縦棒の削除`,
+    `HPバーの見た目変更`,
+    `魔法クールダウンの終了通知追加`
   ]
   form.title(`パッチノート`)
   for (let i = patchNote.length; i > 0; i--) {
-    form.header(`v${i}`)
+    form.label(`§lv${i}`)
     .label(patchNote[i-1])
     .divider()
   }
