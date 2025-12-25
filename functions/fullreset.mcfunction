@@ -8,7 +8,7 @@ scoreboard players set @s G 100
 scoreboard players set @s nowMp 100
 scoreboard players set @s magicCoolDown 0
 scoreboard players set @s stage 0
-scoreboard players set @s magic -20
+scoreboard players set @s magic -100
 scoreboard players set @s village 1
 scoreboard players reset @s protection_G 
 scoreboard players reset @s protection_nowMp
