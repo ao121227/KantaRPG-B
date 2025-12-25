@@ -23,6 +23,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
   if (ev.id === `op:menu`) {
     opMenu(player);
   }
+  
 
   if (ev.id === `i:notJob`) {
     player.sendMessage(`> §4この魔法は魔法ジョブが${message}でないと使用できない！`)
@@ -546,6 +547,7 @@ world.afterEvents.entityDie.subscribe(ev => {
       if (entity.hasTag("mob:002")) entity.runCommand(`function mob/drop/m002`);
       if (entity.hasTag("mob:003")) entity.runCommand(`function mob/drop/m003`);
       if (entity.hasTag("mob:004")) entity.runCommand(`function mob/drop/m004`);
+      if (entity.hasTag("monster")) entity.nameTag = "";
     }
   }
 });
