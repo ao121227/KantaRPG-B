@@ -627,6 +627,32 @@ world.afterEvents.entityHurt.subscribe((event) => {
     }
 });
 
+// ワールド作成ツール
+world.afterEvents.projectileHitBlock.subscribe((event) => {
+    const { projectile, location, dimension } = event;
+    const { x, y, z } = location;
+    const block = `${Math.floor(x)} ${Math.floor(y)} ${Math.floor(z)}`
+    if (projectile) {
+      if (projectile.typeId == "minecraft:snowball") {
+        const list = {
+          mushroom:[
+            "build/mushrooms/red/small",
+            "build/mushrooms/brown/small",
+            "build/mushrooms/red/big",
+            "build/mushrooms/brown/big"
+          ],
+          mini_mushroom:[
+            "~~~~~~ red_mushroom replace air",
+            "~~~~~~ brown_mushroom replace air"
+          ]
+        }
+        const run = list.mini_mushroom[Math.floor(Math.random() * list.mini_mushroom.length)]
+        if (run.includes("/")) dimension.runCommand(`execute positioned ${block} run function ${run}`)
+          else dimension.runCommand(`execute positioned ${block} run fill ${run}`)
+      }
+    }
+});
+
 
 function CreatedropItemMenu(player) {
   const form = new mcui.ModalFormData()

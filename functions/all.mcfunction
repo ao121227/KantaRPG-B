@@ -85,3 +85,8 @@ execute positioned -68.45 -42.56 -4.39 run effect @a[r=3] regeneration 3 1 true
 # sneakTag
 tag @a remove sneak
 execute as @a at @s if entity @s[y=~1.4,dx=0] unless entity @s[y=~1.5,dx=0] run tag @s add sneak
+
+# build
+#execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~1~-1~1~-1~-3~-1 minecraft:podzol replace air
+#execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~1~-1~1~-1~-3~-1 minecraft:podzol replace water
+#execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~5~5~5~-5~-5~-5 water replace stone
