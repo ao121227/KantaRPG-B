@@ -233,6 +233,10 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     const score = object.getScore(player.scoreboardIdentity);
     let spd = score - 1
     if (spd >= 1) player.runCommand(`effect @s speed 1 ${spd} true`)
+    if (spd <= 1) {
+      spd *= -1;
+      player.runCommand(`effect @s slow_ness 1 ${spd} true`)
+    }
   }
   if (ev.id === `status:jmp`) {
     const object = world.scoreboard.getObjective("jmp");
@@ -629,25 +633,33 @@ world.afterEvents.entityHurt.subscribe((event) => {
 
 // ワールド作成ツール
 world.afterEvents.projectileHitBlock.subscribe((event) => {
-    const { projectile, location, dimension } = event;
+    const { projectile, location, dimension, source } = event;
     const { x, y, z } = location;
     const block = `${Math.floor(x)} ${Math.floor(y)} ${Math.floor(z)}`
     if (projectile) {
-      if (projectile.typeId == "minecraft:snowball") {
+      if (projectile.typeId == "minecraft:snowball" && source.hasTag("build")) {
         const list = {
-          mushroom:[
-            "build/mushrooms/red/small",
-            "build/mushrooms/brown/small",
-            "build/mushrooms/red/big",
-            "build/mushrooms/brown/big"
-          ],
-          mini_mushroom:[
-            "~~~~~~ red_mushroom replace air",
-            "~~~~~~ brown_mushroom replace air"
-          ]
+          mushroom:{
+            normal:[
+              "mushrooms/red/small",
+              "mushrooms/brown/small",
+              "mushrooms/red/big",
+              "mushrooms/brown/big"
+            ],
+            mini:[
+              "~~~~~~ red_mushroom replace air",
+              "~~~~~~ brown_mushroom replace air"
+            ],
+          },
+          trees:{
+            dark_oak:[
+              "trees/dark_oak/1",
+              "trees/dark_oak/2"
+            ]
+          }
         }
-        const run = list.mini_mushroom[Math.floor(Math.random() * list.mini_mushroom.length)]
-        if (run.includes("/")) dimension.runCommand(`execute positioned ${block} run function ${run}`)
+        const run = list.trees.dark_oak[Math.floor(Math.random() * list.trees.dark_oak.length)]
+        if (run.includes("/")) dimension.runCommand(`execute positioned ${block} run function build/${run}`)
           else dimension.runCommand(`execute positioned ${block} run fill ${run}`)
       }
     }
