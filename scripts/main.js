@@ -551,6 +551,7 @@ world.afterEvents.entityDie.subscribe(ev => {
       if (entity.hasTag("mob:002")) entity.runCommand(`function mob/drop/m002`);
       if (entity.hasTag("mob:003")) entity.runCommand(`function mob/drop/m003`);
       if (entity.hasTag("mob:004")) entity.runCommand(`function mob/drop/m004`);
+      if (entity.hasTag("mob:005")) entity.runCommand(`function mob/drop/m005`);
       if (entity.hasTag("monster")) entity.nameTag = "";
     }
   }
@@ -924,7 +925,13 @@ function dropSell(player,itemname) {
             "§r§fハッパ" : 5,
             "§r§2オークの原木" : 25,
             "§r§2りんご" : 20,
-            "§r§6金のりんご" : 150
+            "§r§6金のりんご" : 150,
+
+            // mob:005
+            "§r§f赤キノコ" : 10,
+            "§r§2キノコの柄" : 15,
+            "§r§2大きい赤キノコ" : 30,
+            "§r§6変形した赤キノコ" : 50
           };
           if (sell[itemName]) {
             player.runCommand(`scoreboard players add @s G ${sell[itemName] * amount}`);
@@ -1022,13 +1029,15 @@ function dropItemMenu(player) {
     "腐った肉","ゾンビの硬肉","ニンジン","じゃがいも",
     "骨","良質な骨のかけら","骨の粉","骨のかたまり","水の欠片",
     "少し腐った肉","ハスクの硬肉","砂","金のニンジン","火の欠片",
-    "ハッパ","オークの原木","りんご","金のりんご"
+    "ハッパ","オークの原木","りんご","金のりんご",
+    "赤キノコ","キノコの柄","大きい赤キノコ","変形した赤キノコ"
   ]
   const itemsId = [
     "loot:0011","loot:0012","loot:0013","loot:0014",
     "loot:0021","loot:0022","loot:0023","loot:0024","loot:0025",
     "loot:0031","loot:0032","loot:0033","loot:0034","loot:0035",
-    "loot:0041","loot:0042","loot:0043","loot:0044"
+    "loot:0041","loot:0042","loot:0043","loot:0044",
+    "loot:0051","loot:0052","loot:0053","loot:0054"
   ]
   const form = new mcui.ActionFormData()
       .title(`ドロップアイテムメニュー`)
@@ -1133,7 +1142,8 @@ function patchNote(player) {
     `アクションバーにあった縦棒の削除`,
     `名前の上のHPバーの見た目変更`,
     `魔法クールダウンの終了通知追加`,
-    `与えたダメージ量の可視化（がんばった）`
+    `与えたダメージ量の可視化（がんばった）`,
+    `日本語 - 旧フォントの追加`
   ]
   form.title(`パッチノート`)
   for (let i = patchNote.length; i > 0; i--) {
