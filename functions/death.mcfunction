@@ -7,9 +7,11 @@ execute if score @s stage matches 1 run tellraw @a { "rawtext": [ { "text": "> �
 execute if score @s stage matches 2 run tellraw @a { "rawtext": [ { "text": "> §4" },{ "selector": "@s" },{ "text": "さんが サラサラ砂漠 で死にました" }] }
 execute if score @s stage matches 3 run tellraw @a { "rawtext": [ { "text": "> §4" },{ "selector": "@s" },{ "text": "さんが カチカチ山脈 で死にました" }] }
 execute if score @s stage matches 4 run tellraw @a { "rawtext": [ { "text": "> §4" },{ "selector": "@s" },{ "text": "さんが 荒廃した地底 で死にました" }] }
+execute if score @s stage matches 5 run tellraw @a { "rawtext": [ { "text": "> §4" },{ "selector": "@s" },{ "text": "さんが キノコ山岳 で死にました" }] }
 scoreboard players set @s stage 0
 tellraw @s { "rawtext": [ { "text": "> §4XPとGを半分失ってしまった。" }] }
 playsound random.hurt
 tag @s add deathHealth
 fog @s remove s2
 fog @s remove s4
+fog @s remove s5

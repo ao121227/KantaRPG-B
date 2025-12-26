@@ -322,6 +322,13 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
       player.runCommand(`fog @s remove s2`)
       player.runCommand(`title @s title §fカチカチ山脈`);
       player.runCommand(`title @s subtitle §4危険度 Lv.11`);
+  } else if (message == 3.1) {
+      player.runCommand(`tp -84.33 -48.00 194.20`);
+      player.runCommand(`scoreboard players set @s stage 3`);
+      player.runCommand(`scoreboard players set @s village 0`);
+      player.runCommand(`fog @s remove s5`)
+      player.runCommand(`title @s title §fカチカチ山脈`);
+      player.runCommand(`title @s subtitle §4危険度 Lv.11`);
   } else if (message == 4) {
       player.runCommand(`tp -101.76 -45.00 41.34`);
       player.runCommand(`scoreboard players set @s stage 4`);
@@ -329,6 +336,13 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
       player.runCommand(`fog @s push fog:s4 s4`)
       player.runCommand(`title @s title §a荒廃した地底`);
       player.runCommand(`title @s subtitle §4危険度 Lv.17`);
+  } else if (message == 5) {
+      player.runCommand(`tp -75.23 -41.00 206.09`);
+      player.runCommand(`scoreboard players set @s stage 5`);
+      player.runCommand(`scoreboard players set @s village 0`);
+      player.runCommand(`fog @s push fog:s5 s5`)
+      player.runCommand(`title @s title §5キノコ山岳`);
+      player.runCommand(`title @s subtitle §4危険度 Lv.20`);
   }
   player.runCommand(`scoreboard players set @s music -20`)
 }
