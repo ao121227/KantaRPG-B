@@ -985,11 +985,12 @@ function opMenu(player) {
       .button(`2. アドベンチャーになる`)
       .button(`3. アイテムメニューを開く`)
       .button(`4. 武器メニューを開く`)
-      .button(`5. アーティファクトメニューを開く`)
-      .button(`6. パッチノート`)
-      .button(`7. ステータスをリセットする`)
-      if (player.hasTag("bgmStop")) form.button(`8. BGMをオンにする`)
-        else form.button(`8. BGMをオフにする`)
+      .button(`5. クラフトアイテムメニューを開く`)
+      .button(`6. アーティファクトメニューを開く`)
+      .button(`7. パッチノート`)
+      .button(`8. ステータスをリセットする`)
+      if (player.hasTag("bgmStop")) form.button(`9. BGMをオンにする`)
+        else form.button(`9. BGMをオフにする`)
       form.show(player).then((res) => {
         switch (res.selection) {
           case 0:
@@ -1007,12 +1008,15 @@ function opMenu(player) {
             weaponItemMenu(player)
             break;
           case 4:
-            artifactItemMenu(player)
+            craftingItemMenu(player)
             break;
           case 5:
-            patchNote(player)
+            artifactItemMenu(player)
             break;
           case 6:
+            patchNote(player)
+            break;
+          case 7:
             const message = new mcui.MessageFormData()
               .title(`ステータスリセット確認`)
               .body(`本当にステータスをリセットしますか？`)
@@ -1025,7 +1029,7 @@ function opMenu(player) {
                 }
               })
             break;
-          case 7:
+          case 8:
             if (player.hasTag("bgmStop")) {
               player.runCommand(`tag @s remove bgmStop`)
               player.runCommand(`scoreboard players set @s music -20`)
@@ -1110,6 +1114,26 @@ function artifactItemMenu(player) {
         }
       });
 }
+function craftingItemMenu(player) {
+  const items = [
+    "ゾンビ防具",
+    "野菜スープ","健康スープ","マナボトル (小)"
+  ]
+  const itemsId = [
+    "crafting:0011",
+    "cooking:0011","cooking:0021","cooking:0022"
+  ]
+  const form = new mcui.ActionFormData()
+      .title(`クラフトアイテムメニュー`)
+      for (let i = 1; i <= items.length; i++) {
+        form.button(`${i}. ${items[i-1]}`);
+      }
+      form.show(player).then((res) => {
+        if (!(res.canceled)) {
+          giveItem(player, itemsId[res.selection], items[res.selection]);
+        }
+      });
+}
 function giveItem(player, itemId, itemName) {
   const form = new mcui.ModalFormData()
     .title(`${itemName}`)
@@ -1164,7 +1188,8 @@ function patchNote(player) {
     `日本語 - 旧フォントの追加`,
     `新モブ（赤キノコ）、新ステ（キノコ山岳）の追加`,
     `スケルトンのスポーン量調整`,
-    `マナボトル(小)の追加`
+    `マナボトル(小)の追加`,
+    `クラフトアイテムメニューの追加`
   ]
   form.title(`パッチノート`)
   for (let i = patchNote.length; i > 0; i--) {
