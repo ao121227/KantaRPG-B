@@ -233,8 +233,9 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     const score = object.getScore(player.scoreboardIdentity);
     let spd = score - 1
     if (spd >= 1) player.runCommand(`effect @s speed 1 ${spd} true`)
-    if (spd <= 1) {
+    else {
       spd *= -1;
+      spd += 1;
       player.runCommand(`effect @s slow_ness 1 ${spd} true`)
     }
   }
@@ -556,6 +557,10 @@ world.afterEvents.itemCompleteUse.subscribe(ev => {
     player.runCommand("effect @s absorption 90 0 true");
     player.playSound("random.orb");
   }
+  if (ev.itemStack.nameTag === "§r§6マナボトル (小)") {
+    player.runCommand("scoreboard players add @s nowMp 25");
+    player.playSound("random.orb");
+  }
 });
 world.afterEvents.entityDie.subscribe(ev => {
   const entity = ev.deadEntity;
@@ -591,7 +596,7 @@ world.afterEvents.playerSwingStart.subscribe(ev => {
       player.runCommand(`function magicFunction/wand/3200.explosivewand/_`)
       break;
 
-    // 剣の発動確認
+    // 剣のレベル確認
     case "§r§2石の剣":
       swordAttackCheck(5);
       break;
@@ -679,7 +684,6 @@ world.afterEvents.projectileHitBlock.subscribe((event) => {
       }
     }
 });
-
 
 function CreatedropItemMenu(player) {
   const form = new mcui.ModalFormData()

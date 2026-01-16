@@ -87,6 +87,6 @@ tag @a remove sneak
 execute as @a at @s if entity @s[y=~1.4,dx=0] unless entity @s[y=~1.5,dx=0] run tag @s add sneak
 
 # build
-#execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~1~-1~1~-1~-3~-1 minecraft:podzol replace air
-#execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~1~-1~1~-1~-3~-1 minecraft:podzol replace water
+#execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~1~-1~1~-1~-5~-1 minecraft:grass_block replace air
+#execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~1~-1~1~-1~-5~-1 minecraft:grass_block replace water
 #execute as @a[hasitem={item=snowball,location=slot.weapon.mainhand}] at @s run fill ~5~5~5~-5~-5~-5 water replace stone
