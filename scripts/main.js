@@ -1,8 +1,8 @@
-import * as mc from "@minecraft/server"; // Ver 2.0.0
 import * as mcui from "@minecraft/server-ui"; // Ver 2.0.0
-import { world } from '@minecraft/server';
+import { world, system } from '@minecraft/server';
+import * as functions from "./functions.js";
 
-mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
+system.afterEvents.scriptEventReceive.subscribe((ev) => {
   const player = ev.sourceEntity;
   const message = ev.message;
   // itemCreateTool
@@ -38,17 +38,15 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     player.playSound(`click_on.bamboo_wood_button`)
   }
   if (ev.id === `i:notCoolDown`) {
-    const object = world.scoreboard.getObjective("magicCoolDown");
-    const score = object.getScore(player.scoreboardIdentity);
-    let s = score / 20
-    player.sendMessage(`> §4クールダウン中！§7 ( 残り: §e${s}s§r§7 )`)
+    const coolDown = functions.getScoreboard(player, "magicCoolDown")
+    const second = coolDown / 20
+    player.sendMessage(`> §4クールダウン中！§7 ( 残り: §e${second}s§r§7 )`)
+    player.playSound(`click_on.bamboo_wood_button`)
   }
   if (ev.id === `xpbar:point`) {
-    const objectNow = world.scoreboard.getObjective("nowMp");
-    const objectMax = world.scoreboard.getObjective("maxMp");
-    const scoreNow = objectNow.getScore(player.scoreboardIdentity);
-    const scoreMax = objectMax.getScore(player.scoreboardIdentity);
-    const percent = Math.floor((scoreNow / scoreMax) * 1000)
+    const nowMp = functions.getScoreboard(player, "nowMp");
+    const maxMp = functions.getScoreboard(player, "maxMp");
+    const percent = Math.floor((nowMp / maxMp) * 1000)
     player.runCommand(`xp ${percent} @s`)
     player.sendMessage(`${percent}`)
   }
@@ -79,11 +77,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     }
   }
   if (ev.id === `dungeon:loot`) {
-    let lootName
-    let lootRare
-    let lootStructure
-    let lootRareView = []
-    let lootRareNumber
+    let lootName, lootRare, lootStructure, lootRareView = [], lootRareNumber;
     switch (message) {
       case "test1":
         lootName = ["§f腐った肉","§2ニンジン","§2ゾンビの硬肉","§2石の剣","§2石の杖"]
@@ -135,9 +129,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     const Nrandom1 = Math.floor(Math.random() * (lootName.length - (lootRareNumber - 1)));
     const Nrandom2 = Math.floor(Math.random() * (lootName.length - (lootRareNumber - 1)));
     const Nrandom3 = Math.floor(Math.random() * (lootName.length - (lootRareNumber - 1)));
-    let g1
-    let g2
-    let g3
+    let g1, g2, g3
     if (Math.floor(Math.random() * 100) <= 20) g1 = random1
     else g1 = Nrandom1
     if (Math.floor(Math.random() * 100) <= 20) g2 = random2
@@ -217,10 +209,9 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
   // weapon & armor
    if (ev.id === "item:needLv") {
     const m = JSON.parse(message)
-    const object = world.scoreboard.getObjective("nowLv");
-    const score = object.getScore(player.scoreboardIdentity);
-    if (m.slot == "mainHand") if (mainHandCheck(player,m.name)) if (!(score >= Number(m.lv))) player.runCommand(`effect @s weakness 1 255 false`);
-    if (m.slot == "armor") if (armorCheck(player,m.name)) if (!(score >= Number(m.lv))) {
+    const lv = functions.getScoreboard(player, "nowLv")
+    if (m.slot == "mainHand") if (mainHandCheck(player,m.name)) if (!(lv >= Number(m.lv))) player.runCommand(`effect @s weakness 1 255 false`);
+    if (m.slot == "armor") if (armorCheck(player,m.name)) if (!(lv >= Number(m.lv))) {
       player.runCommand(`effect @s slowness 1 255 false`);
       player.runCommand(`title @s times 1 1 1`);
       player.runCommand(`title @s title §4防具の必要レベル: Lv.${Number(m.lv)}`);
@@ -229,9 +220,8 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
 
   // status
   if (ev.id === `status:spd`) {
-    const object = world.scoreboard.getObjective("spd");
-    const score = object.getScore(player.scoreboardIdentity);
-    let spd = score - 1
+    const speed = functions.getScoreboard(player, "spd");
+    let spd = speed - 1
     if (spd >= 1) player.runCommand(`effect @s speed 1 ${spd} true`)
     else {
       spd *= -1;
@@ -240,17 +230,15 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     }
   }
   if (ev.id === `status:jmp`) {
-    const object = world.scoreboard.getObjective("jmp");
-    const score = object.getScore(player.scoreboardIdentity);
-    let jmp = score - 1
+    const jump = functions.getScoreboard(player, "jmp");
+    let jmp = jump - 1
     player.runCommand(`effect @s jump_boost 1 ${jmp} true`)
   }
   if (ev.id === `status:vampire`) {
-    const object = world.scoreboard.getObjective("vampire");
-    const score = object.getScore(player.scoreboardIdentity) | 0;
-    const percent = 100 - score
+    const vampire = functions.getScoreboard(player, "vampire");
+    const percent = 100 - vampire
     const random = Math.floor(Math.random() * percent);
-    if (score !== 0 && random === 0) {
+    if (vampire !== 0 && random === 0) {
       player.playSound(`mob.parrot.hurt`);
       player.runCommand(`effect @s instant_health 1 ${message} true`);
       player.runCommand(`particle minecraft:trial_spawner_detection ~-0.5~~-0.5`)
@@ -258,19 +246,17 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
   }
   if (ev.id === `status:result`) {
     const m = JSON.parse(message)
-    const objectXP = world.scoreboard.getObjective("xpBonus");
-    const scoreXP = objectXP.getScore(player.scoreboardIdentity) | 0;
-    const objectLv = world.scoreboard.getObjective("nowLv");
-    const scoreLv = objectLv.getScore(player.scoreboardIdentity) | 0;
-    let xpBonusP = (100 + scoreXP) / 100
+    const xpbonus = functions.getScoreboard(player, "xpBonus");
+    const nowLv = functions.getScoreboard(player, "nowLv");
+    let xpBonusP = (100 + xpbonus) / 100
     let giveXp = Math.floor(Number(m.xp)*xpBonusP)
     let xpBonus = giveXp - Number(m.xp)
     let g = Number(m.g)
     let xp = Number(m.xp)
-    if (scoreLv >= 50) xp = "MAX"
+    if (nowLv >= 50) xp = "MAX"
     player.runCommand(`scoreboard players add @s nowXp ${giveXp}`)
     player.runCommand(`scoreboard players add @s G ${g}`)
-    if (scoreLv >= 50) player.runCommand(`execute positioned ~~1~ run summon rpg:result "§2獲得経験値: §f${xp}\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
+    if (nowLv >= 50) player.runCommand(`execute positioned ~~1~ run summon rpg:result "§2獲得経験値: §f${xp}\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
       else if (xpBonus == 0) player.runCommand(`execute positioned ~~1~ run summon rpg:result "§2獲得経験値: §f${xp}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
       else player.runCommand(`execute positioned ~~1~ run summon rpg:result "§2獲得経験値: §f${xp}+${xpBonus}§aXP\n§6獲得ゴールド: §f${g}§eG" ^^^2.5`)
   }
@@ -356,10 +342,8 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
   }
 
   if (ev.id === `r:artifact`) {
-    const slot1Object = world.scoreboard.getObjective("artifacts");
-    const slot2Object = world.scoreboard.getObjective("artifacts2");
-    const slot1 = slot1Object.getScore(player.scoreboardIdentity) | 0;
-    const slot2 = slot2Object.getScore(player.scoreboardIdentity) | 0;
+    const artifact = functions.getScoreboard(player, "artifacts");
+    const artifact2 = functions.getScoreboard(player, "artifacts2");
     const artifacts = {
       0: "§7なし",
       1001: "§2すばやさのはね",
@@ -369,8 +353,8 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
       2003: "§6吸血の粉",
       3001: "§d魔法のクリスタル"
     }
-    player.sendMessage(` §9アーティファクト1: ${artifacts[slot1]}`)
-    player.sendMessage(` §9アーティファクト2: ${artifacts[slot2]}`)
+    player.sendMessage(` §9アーティファクト1: ${artifacts[artifact]}`)
+    player.sendMessage(` §9アーティファクト2: ${artifacts[artifact2]}`)
   }
 
   // 釣り
@@ -379,30 +363,26 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
     if (inventory) {
       const selectedItem = inventory.container.getItem(player.selectedSlotIndex);
       if (selectedItem) {
-        const objectFishingBait = world.scoreboard.getObjective("fishingBait");
-        const scoreFishingBait = objectFishingBait.getScore(player.scoreboardIdentity) || 0;
+        const fishingBait = functions.getScoreboard(player, "fishingBait");
         const itemName = selectedItem.nameTag;
         const rod = {
           "§r§2普通の釣り竿" : 0,
           "§r§6すごい釣り竿" : 2,
           "§r§4伝説の釣り竿" : 4
         };
-        player.runCommand(`scoreboard players set @s fishingPower ${rod[itemName] + scoreFishingBait}`)
+        player.runCommand(`scoreboard players set @s fishingPower ${rod[itemName] + fishingBait}`)
       }
     }
   }
   if (ev.id === `fishing:loot`) {
     const fishingData = JSON.parse(message)
-    const objectStage = world.scoreboard.getObjective("stage");
-    const objectVillage = world.scoreboard.getObjective("village");
-    const objectFishingBait = world.scoreboard.getObjective("fishingBait");
-    const scoreStage = objectStage.getScore(player.scoreboardIdentity)
-    const scoreVillage = objectVillage.getScore(player.scoreboardIdentity)
-    const scoreFishingBait = objectFishingBait.getScore(player.scoreboardIdentity) || 0;
+    const stage = functions.getScoreboard(player, "stage");
+    const village = functions.getScoreboard(player, "village");
+    const fishingBait = functions.getScoreboard(player, "fishingBait");
     let fishingPlace
     let fishingAmount = Number(fishingData.amount);
-    if (scoreStage != 0) fishingPlace = `s${scoreStage}`
-    else fishingPlace = `v${scoreVillage}`
+    if (stage != 0) fishingPlace = `s${stage}`
+    else fishingPlace = `v${village}`
 
     if (fishingData.sort == "fish") {
       switch (fishingPlace) {
@@ -412,7 +392,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
           if (fishingAmount > 3-1) v1()
           break;
       }
-      if (scoreFishingBait != 0) {
+      if (fishingBait != 0) {
         player.runCommand(`scoreboard players set @s fishingBait 0`)
         player.sendMessage(`> 餌を消費しました`)
         player.playSound(`random.orb`)
@@ -433,8 +413,7 @@ mc.system.afterEvents.scriptEventReceive.subscribe((ev) => {
   }
 })
 world.beforeEvents.playerInteractWithEntity.subscribe((event) => {
-  const player = event.player;
-  const entity = event.target;
+  const { entity, player } = event;
 
   if (entity.nameTag == "§r村人") {
     player.sendMessage(`<村人> いらっしゃい！`)
@@ -442,21 +421,20 @@ world.beforeEvents.playerInteractWithEntity.subscribe((event) => {
 });
 
 world.afterEvents.itemUse.subscribe(evd => {
-  const player = evd.source;
+  const { itemStack, source: player } = evd;
+  const fishingBait = functions.getScoreboard(player, "fishingBait");
 
   // others
-  if (evd.itemStack.typeId === 'minecraft:nether_star' && evd.itemStack.nameTag === '§r§7ステータス確認') {
+  if (itemStack.typeId === 'minecraft:nether_star' && itemStack.nameTag === '§r§7ステータス確認') {
     player.runCommand(`function status/check`);
   }
-  if (evd.itemStack.typeId === 'minecraft:nether_star' && evd.itemStack.nameTag === '§r§7オペレーターメニュー') {
+  if (itemStack.typeId === 'minecraft:nether_star' && itemStack.nameTag === '§r§7オペレーターメニュー') {
     opMenu(player);
   }
   
   // 餌
-  if (evd.itemStack.nameTag === '§r§f普通の餌') { 
-    const objectFishingBait = world.scoreboard.getObjective("fishingBait");
-    const scoreFishingBait = objectFishingBait.getScore(player.scoreboardIdentity) || 0;
-    if (scoreFishingBait === 0) {
+  if (itemStack.nameTag === '§r§f普通の餌') { 
+    if (fishingBait === 0) {
       player.sendMessage(`> §f「普通の餌」§fをセットしました`)
       player.runCommand(`scoreboard players set @s fishingBait 1`)
       player.runCommand(`clear @s armadillo_scute 0 1`)
@@ -466,10 +444,8 @@ world.afterEvents.itemUse.subscribe(evd => {
       player.playSound(`click_on.bamboo_wood_button`)
     }
   } 
-  if (evd.itemStack.nameTag === '§r§2すごい餌') { 
-    const objectFishingBait = world.scoreboard.getObjective("fishingBait");
-    const scoreFishingBait = objectFishingBait.getScore(player.scoreboardIdentity) || 0;
-    if (scoreFishingBait === 0) {
+  if (itemStack.nameTag === '§r§2すごい餌') { 
+    if (fishingBait === 0) {
       player.sendMessage(`> §2「すごい餌」§fをセットしました`)
       player.runCommand(`scoreboard players set @s fishingBait 2`)
       player.runCommand(`clear @s nautilus_shell 0 1`)
@@ -480,10 +456,8 @@ world.afterEvents.itemUse.subscribe(evd => {
       
     }
   }
-  if (evd.itemStack.nameTag === '§r§6とてもすごい餌') { 
-    const objectFishingBait = world.scoreboard.getObjective("fishingBait");
-    const scoreFishingBait = objectFishingBait.getScore(player.scoreboardIdentity) || 0;
-    if (scoreFishingBait === 0) {
+  if (itemStack.nameTag === '§r§6とてもすごい餌') { 
+    if (fishingBait === 0) {
       player.sendMessage(`> §6「とてもすごい餌」§fをセットしました`)
       player.runCommand(`scoreboard players set @s fishingBait 3`)
       player.runCommand(`clear @s phantom_membrane 0 1`)
@@ -496,53 +470,57 @@ world.afterEvents.itemUse.subscribe(evd => {
   }
 
   // 魔法
-  if (evd.itemStack.nameTag === '§r§4ファイアボール') { 
-    player.runCommand(`function magicFunction/magic/1001.fireball/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§4円火') { 
-    player.runCommand(`function magicFunction/magic/1101.circlefire/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§4ファイアウォール') { 
-    player.runCommand(`function magicFunction/magic/1102.firewall/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§3ウォーターボール') {
-    player.runCommand(`function magicFunction/magic/2001.waterball/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§3水責め') {
-    player.runCommand(`function magicFunction/magic/2101.waterattack/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§nアースボール') {
-    player.runCommand(`function magicFunction/magic/3001.earthball/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§eミニヒール') {
-    player.runCommand(`function magicFunction/magic/4101.miniheal/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§eヒール') {
-    player.runCommand(`function magicFunction/magic/4201.heal/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§aウィンドボール') {
-    player.runCommand(`function magicFunction/magic/5001.windball/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§aウィンドウォール') {
-    player.runCommand(`function magicFunction/magic/5101.windwall/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§fスーパーステップ') {
-    player.runCommand(`function magicFunction/magic/6001.superstep/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§fパワー！！') {
-    player.runCommand(`function magicFunction/magic/6101.power/_`)
-  }
-  if (evd.itemStack.nameTag === '§r§nうんこクリスタルボール') {
-    if (isKanataArmor) {
-      player.runCommand(`function magicFunction/magic/7001.poopball/_`)
-    } else {
-      player.sendMessage(`> §r§4カナタ装備フルでないと使用できません。`)
-      player.playSound(`click_on.bamboo_wood_button`);
-    }
+  switch (itemStack.nameTag) {
+    case '§r§4ファイアボール':
+      player.runCommand(`function magicFunction/magic/1001.fireball/_`);
+      break;
+    case '§r§4円火':
+      player.runCommand(`function magicFunction/magic/1101.circlefire/_`);
+      break;
+    case '§r§4ファイアウォール':
+      player.runCommand(`function magicFunction/magic/1102.firewall/_`);
+      break;
+    case '§r§3ウォーターボール':
+      player.runCommand(`function magicFunction/magic/2001.waterball/_`);
+      break;
+    case '§r§3水責め':
+      player.runCommand(`function magicFunction/magic/2101.waterattack/_`);
+      break;
+    case '§r§nアースボール':
+      player.runCommand(`function magicFunction/magic/3001.earthball/_`);
+      break;
+    case '§r§eミニヒール':
+      player.runCommand(`function magicFunction/magic/4101.miniheal/_`);
+      break;
+    case '§r§eヒール':
+      player.runCommand(`function magicFunction/magic/4201.heal/_`);
+      break;
+    case '§r§aウィンドボール':
+      player.runCommand(`function magicFunction/magic/5001.windball/_`);
+      break;
+    case '§r§aウィンドウォール':
+      player.runCommand(`function magicFunction/magic/5101.windwall/_`);
+      break;
+    case '§r§fスーパーステップ':
+      player.runCommand(`function magicFunction/magic/6001.superstep/_`);
+      break;
+    case '§r§fパワー！！':
+      player.runCommand(`function magicFunction/magic/6101.power/_`);
+      break;
+    case '§r§nうんこクリスタルボール':
+      if (isKanataArmor) {
+        player.runCommand(`function magicFunction/magic/7001.poopball/_`);
+      } else {
+        player.sendMessage(`> §r§4カナタ装備フルでないと使用できません。`);
+        player.playSound(`click_on.bamboo_wood_button`);
+      }
+      break;
+    default:
+      break;
   }
 
   // admin
-  if (evd.itemStack.nameTag === 'leap') { 
+  if (itemStack.nameTag === 'leap') { 
     player.runCommand(`scriptevent kb:leap 7.5 1`)
   }
 });
